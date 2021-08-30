@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>ProductList</title>
+  <link rel="stylesheet" href="Index.css">
+  <style>
+    #knap1 {
+      padding: 8px;
+    }
+    #knap2 {
+      padding: 8px;
+    }
+    #knap3 {
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="logo">
+  <a th:href="@{'/'}">
+  <img src ="420Logo.png" height="100" width="210" alt="" style="position: absolute; top: 2%; left: 2%;">
+  </a>
+</div>
+<canvas id="gradient-canvas" data-js-darken-top data-transition-in></canvas>
+<a th:href="@{'/'}">
+  <img src="Logo1.png" style="position: absolute; left: 0%; top: -100%;">
+</a>
+<div class ="form-container" style="position: absolute; top: 5%; right: 35%;">
+  <table class="searchTable">
+    <caption style="margin-bottom: 5%; font-size: 200%">Product list</caption>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th class="options">Options</th>
+      <th>Appearance</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product: ${products}">
+      <td th:text="${product.id}"></td>
+      <td th:text="${product.name}"></td>
+      <td th:text="${product.price}"></td>
+      <div id="buttonBox" class="buttonBox">
+        <td>
+          <div id="knap1">
+            <a th:href="@{'/updateProductId='+${product.id}}">
+              <button class="btn-inspect" style="background: #1b884c; width: 50%;">Update</button>
+            </a>
+          </div>
+          <div id="knap2">
+            <a th:href="@{'/deleteProductId='+${product.id}}">
+              <button class="btn-update"style="background: #Df0d31; width: 50%;">Delete</button>
+            </a>
+          </div>
+        </td>
+      </div>
+      <div id="imgTD">
+        <td style="border-right: none"><img class="img" th:src="${product.name}+.png" alt="error" height="100"></td>
+      </div>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<script src="gradient.js"></script>
+
+
+</body>
+</html>

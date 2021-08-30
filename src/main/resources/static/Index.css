@@ -1,0 +1,267 @@
+html,body {
+    margin:0;
+    padding:0;
+    width:100%;
+    height: 100%;
+
+}
+
+#gradient-canvas {
+    width:100%;
+    height: 100%;
+    --gradient-color-1: #1b884c;
+    --gradient-color-2: #1b884c;
+    --gradient-color-3: #Ada506;
+    --gradient-color-4: #Ada506;
+}
+
+.navbar {
+    position: absolute;
+    top: 18%;
+    right: 38%;
+    max-width: 900px;
+    margin:50px auto;
+    font-family: "Poppins", sans-serif;
+    border-radius: 10px;
+
+}
+
+.nav-list {
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+}
+
+.nav-item {
+    position: relative;
+    padding: 25px;
+    height: 100%;
+    cursor: pointer;
+}
+
+.nav-link {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+    letter-spacing: 1px;
+
+}
+.nav-item:hover .nav-link::after{
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 4px;
+    top: 70%;
+    background-color: #e0e0e0;
+
+
+
+}
+.nav-item:hover .nav-link::after {
+    background: linear-gradient(137.17deg, #ae27b7 0%, #da5737 100%);
+
+
+}
+
+.nav-item:hover .nav-link {
+    color: #e0e0e0;
+}
+
+.nav-link i {
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.dropdown-content {
+    background-color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 60px 15px 15px;
+    position: absolute;
+    left: 50%;
+    top:80%;
+    transform: translate(-50%, 15px);
+    border-radius: 10px;
+    transition: opacity 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    transition-delay: 0.2s;
+    z-index: 2;
+}
+
+.nav-item:hover .dropdown-content {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.dropdown-content::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #e0e0e0;
+    top: 0; left: 50%;
+    transform-origin: 0 0;
+    transform: rotate(45deg) translate(-50%, -50%);
+}
+
+.dropdown-link {
+    text-decoration: none;
+    color: #151515;
+    white-space: nowrap;
+    transition: all 0.3s;
+    text-transform: capitalize;
+    font-size: 18px;
+}
+
+.dropdown-link:hover::before {
+    content: "";
+    border: solid #151515;
+    border-width: 0 3px 3px 0;
+    position: absolute;
+    display: inline-block;
+    padding: 3px;
+    top: 27.5%; left: -15%;
+    transform: rotate(-45deg)
+}
+.dropdown-link:hover {
+    transform: translateX(10px);
+
+}
+
+
+.dropdown-link:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+#headline {
+    position: absolute;
+    top: 0%;
+    right: 35%;
+}
+
+
+td {
+    text-align: center;
+
+
+
+}
+.searchTable tbody td {
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+
+}
+
+
+
+
+.form-container {
+    margin-right: auto;
+    margin-left: auto;
+    width: 55%;
+    alignment: center;
+    align-items: center;
+
+
+
+
+}
+
+.searchTable thead th {
+    width: 250px;
+
+}
+.searchTable {
+    display: block;
+    border-collapse: collapse;
+
+}
+
+.form-container table  {
+    height: 850px;
+    width: 1050px;
+    background:rgba(255,255,255,.1);
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.3);
+    border-top: 1px solid rgba(255,255,255,.3);
+    border-left: 1px solid rgba(255,255,255,.3);
+    backdrop-filter: blur(10px);
+    transform-style: preserve-3d;
+    overflow-y: scroll;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    left: 22.5%;
+    top: 115%;
+
+
+}
+
+
+.form-container form{
+    height: 500px;
+    width: 1050px;
+    background:rgba(255,255,255,.1);
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.3);
+    border-top: 1px solid rgba(255,255,255,.3);
+    border-left: 1px solid rgba(255,255,255,.3);
+    backdrop-filter: blur(10px);
+    transform-style: preserve-3d;
+    z-index: 1;
+}
+
+.form-container form h3{
+    font-size: 30px;
+    padding: 30px 0;
+    color:black;
+}
+
+.form-container form input{
+    outline: none;
+    border: none;
+    height: 40px;
+    width: 25%;
+    background: rgba(0,0,0,.1);
+    color: rgba(255,255,255,.7);
+    box-shadow: 0 0 5px rgba(0,0,0,.5) inset;
+    font-size: 17px;
+    padding: 0 10px;}
+.form-container form input[type="checkbox"] {
+    box-shadow: 0 0 1px rgba(0,0,0,.3) ;
+    height: 20px;
+    width: 20px;
+
+}
+.form-container form input[type="submit"]{
+    margin-top: 2%;
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+
+
+}
+
+
+
+
+.form-container form input[type="submit"]:hover {
+    letter-spacing: 0.5px;
+}
+
+
+label {
+    color: black;
+    font-family: Arial;
+    background: rgba(255, 255, 255, .3);
+    margin-right: 10px;
+    width: 100px;
+    display: inline-block;
+}

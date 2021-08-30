@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="Index.css">
+
+  <style>
+
+  </style>
+</head>
+<body>
+
+
+
+
+<div class="logo">
+  <img src ="420Logo.png" height="200" width="420" alt="" style="position: absolute; top: 2%; left: 35%;">
+</div>
+
+<canvas id="gradient-canvas" data-js-darken-top data-transition-in></canvas>
+<script src="gradient.js"></script>
+<div th:if="${tomVisible == true}">
+  <img src="tom.png" id="tom" onload="timer()" style="position: absolute; left:300px; top: 100px;">
+</div>
+<script>
+  function reset1() {
+    clearTimeout(my_time);
+    document.getElementById('tom').style.left="500px";
+    document.getElementById('tom').style.top="100px";
+  }
+
+  function disp(){
+    var step=1;
+    var y=document.getElementById('tom').offsetTop
+    var x=document.getElementById('tom').offsetLeft;
+    var z=document.getElementById('tom').offsetHeight;
+    var q=document.getElementById('tom').offsetWidth;
+    if (y<800) {
+      y = y + step;
+      document.getElementById('tom').style.top = y + "px";
+    } else if (x<1700) {
+      x=x+step;
+      document.getElementById('tom').style.left = x + "px";
+
+    }
+    else{
+      if(y>=800) {
+        z = z - step;
+        document.getElementById('tom').style.height = z + "px";
+        document.getElementById('tom').style.top = -100 + "px";
+        document.getElementById('tom').style.left = 500 + "px";
+      }
+    }
+
+  }
+  function timer() {
+    disp();
+    my_time=setTimeout('timer()', 10);
+
+  }
+</script>
+
+<nav class="navbar">
+  <ul class="nav-list">
+    <li class="nav-item">
+      <div class="dropdown-container">
+        <a class="nav-link" href="#">Product Catalogue<i class="fas fa-chevron-down"></i>
+        </a>
+        <div class="dropdown-content">
+          <a class="dropdown-link" th:href="@{'/viewProductList'}"> Product list </a>
+          <a class="dropdown-link" th:href="@{'/addProduct'}"> Add product </a>
+        </div>
+      </div>
+    </li>
+    <li class="nav-item">
+      <div class="dropdown-container">
+        <a class="nav-link" th:href="@{'/contact'}"> Contact <i class="fas fa-chevron-down"></i>
+        </a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <div class="dropdown-container">
+        <a class="nav-link" th:href="@{'/vision'}" onclick="timer()"> Vision <i class="fas fa-chevron-down"></i>
+        </a>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+
+
+</body>
+</html>

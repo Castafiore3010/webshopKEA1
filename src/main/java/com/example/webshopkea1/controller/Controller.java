@@ -28,6 +28,7 @@ public class Controller {
         //SimpleAudioPlayer music = new SimpleAudioPlayer("intro.wav");
         //music.play();
         model.addAttribute("tomVisible", tomVisible);
+        model.addAttribute("products", productService.fetchAllProducts());
 
         return "home/home";
     }

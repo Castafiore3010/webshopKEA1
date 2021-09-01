@@ -41,37 +41,6 @@ public class SimpleAudioPlayer {
     }
 
 
-    // Work as the user enters his choice
-
-    private void gotoChoice(int c)
-            throws IOException, LineUnavailableException, UnsupportedAudioFileException
-    {
-        switch (c)
-        {
-            case 1:
-                pause();
-                break;
-            case 2:
-                resumeAudio();
-                break;
-            case 3:
-                restart();
-                break;
-            case 4:
-                stop();
-                break;
-            case 5:
-                System.out.println("Enter time (" + 0 +
-                        ", " + clip.getMicrosecondLength() + ")");
-                Scanner sc = new Scanner(System.in);
-                long c1 = sc.nextLong();
-                jump(c1);
-                break;
-
-        }
-
-    }
-
     // Method to play the audio
     public void play()
     {

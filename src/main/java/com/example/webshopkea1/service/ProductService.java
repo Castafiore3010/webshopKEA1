@@ -18,35 +18,35 @@ public class ProductService {
     ProductRepositoryJpa productRepositoryJpa;
 
 
-    public List<Product> fetchAllProducts() { return productRepo.fetchAllProducts(); }
+    public List<Product> fetchAllProducts() { return productRepo.fetchAllProducts(); } // jdbc
 
-    public List<Product> fetchAllJpa() {
+    public List<Product> fetchAllJpa() { // jpa
         return new ArrayList<>(productRepositoryJpa.findAll());
 
     }
 
-    public Product fetchProductById(int id) { return productRepo.fetchProductById(id); }
+    public Product fetchProductById(int id) { return productRepo.fetchProductById(id); } //jdbc
 
     public Optional<Product> findProductByIdJpa(int id) {
         return productRepositoryJpa.findById(id);
     }
 
 
-    public int insertProduct(Product product)  { return productRepo.insertProduct(product); }
+    public int insertProduct(Product product)  { return productRepo.insertProduct(product); }//jdbc
 
-    public void insertProductJpa(Product product) {
+    public void insertProductJpa(Product product) { // jpa
         productRepositoryJpa.save(product);
     }
 
-    public int deleteProduct(int id) { return productRepo.deleteProduct(id); }
+    public int deleteProduct(int id) { return productRepo.deleteProduct(id); } //jdbc
 
-    public void deleteProductJpa(int id) {
+    public void deleteProductJpa(int id) { // jpa
         productRepositoryJpa.deleteById(id);
     }
 
-    public int updateProduct(Product product) { return productRepo.updateProduct(product); }
+    public int updateProduct(Product product) { return productRepo.updateProduct(product); }//jdbc
 
-    public void updateProductJpa(Product product) {
+    public void updateProductJpa(Product product) { // jpa
         productRepositoryJpa.save(product);
     }
 }

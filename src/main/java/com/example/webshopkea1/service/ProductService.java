@@ -21,9 +21,8 @@ public class ProductService {
     public List<Product> fetchAllProducts() { return productRepo.fetchAllProducts(); }
 
     public List<Product> fetchAllJpa() {
-        List<Product> products = new ArrayList<>();
-        productRepositoryJpa.findAll().forEach(products::add);
-        return products;
+        return new ArrayList<>(productRepositoryJpa.findAll());
+
     }
 
     public Product fetchProductById(int id) { return productRepo.fetchProductById(id); }

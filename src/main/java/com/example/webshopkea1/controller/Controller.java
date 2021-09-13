@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.util.Optional;
 
 @org.springframework.stereotype.Controller
 public class Controller {
     @Autowired
     ProductService productService;
     static boolean tomVisible = false;
+
 
 
 
@@ -30,12 +32,16 @@ public class Controller {
         model.addAttribute("tomVisible", tomVisible);
         model.addAttribute("products", productService.fetchAllProducts());
 
+
+
+
+
         return "home/home";
     }
 
-    @GetMapping("/viewProductList")
+    @GetMapping("/viewProductList") // edited to JPA
     public String viewProductList(Model model) {
-        model.addAttribute("products", productService.fetchAllProducts());
+        model.addAttribute("products", productService.fetchAllJpa());
         return "home/productList";
 
     }
@@ -46,9 +52,11 @@ public class Controller {
         return "home/addProduct";
     }
 
-    @PostMapping("/addProduct")
+
+
+    @PostMapping("/addProduct") // edited to JPA
     public String addProductButton(@ModelAttribute Product product) throws UnsupportedAudioFileException, LineUnavailableException, IOException, InterruptedException {
-        productService.insertProduct(product);
+        productService.insertProductJpa(product);
         SimpleAudioPlayer music = new SimpleAudioPlayer("addSound.wav");
         music.play();
 
@@ -57,25 +65,27 @@ public class Controller {
 
     }
 
-    @GetMapping("/deleteProductId={id}")
+    @GetMapping("/deleteProductId={id}") // edited jpa
     public String deleteProduct(@PathVariable ("id") int id) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        productService.deleteProduct(id);
+        productService.deleteProductJpa(id);
         SimpleAudioPlayer music = new SimpleAudioPlayer("deleteSound.wav");
         music.play();
         return "redirect:/viewProductList";
 
     }
 
-    @GetMapping("/updateProductId={id}")
+    @GetMapping("/updateProductId={id}") // edited jpa
     public String updateProduct(@PathVariable ("id") int id, Model model) {
-        model.addAttribute("product", productService.fetchProductById(id));
+        Optional<Product> oP = productService.findProductByIdJpa(id);
+        oP.ifPresent(product -> model.addAttribute("product", product));
+
         return "home/updateProduct";
     }
 
-    @PostMapping("/updateProduct")
+    @PostMapping("/updateProduct") // edited jpa
     public String updateProduct(@ModelAttribute Product product, Model model) {
         model.addAttribute("product", product);
-        productService.updateProduct(product);
+        productService.updateProductJpa(product);
         return "redirect:/viewProductList";
 
     }

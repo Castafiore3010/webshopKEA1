@@ -90,7 +90,7 @@ public class Controller {
 
     }
 
-    @GetMapping("/productListProducts")
+    @GetMapping("/productListProducts") // ResponseEntity
     public ResponseEntity<List<Product>> getAllProductsInList(){
         List<Product> products = new ArrayList<>();
         products = productService.fetchAllJpa();

@@ -4,18 +4,26 @@ import com.example.webshopkea1.model.Product;
 import com.example.webshopkea1.model.SimpleAudioPlayer;
 import com.example.webshopkea1.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @org.springframework.stereotype.Controller
+//@ResponseBody
 public class Controller {
     @Autowired
     ProductService productService;
@@ -23,26 +31,70 @@ public class Controller {
 
 
 
-
-
     @GetMapping("/")
-    public String index(Model model) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public String index2(Model model) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         //SimpleAudioPlayer music = new SimpleAudioPlayer("intro.wav");
         //music.play();
         model.addAttribute("tomVisible", tomVisible);
 
-
-
-
-
-        return "home/home";
+         return "home/home";
     }
 
+
+    @GetMapping("/customHeader")
+    ResponseEntity<String> customHeader() {
+        return ResponseEntity.ok()
+                .header("Custom-Header", "foo")
+                .body("Custom header set");
+    }
+    /*
+
+    @GetMapping("/")
+    public ResponseEntity<String> index(Model model) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        //SimpleAudioPlayer music = new SimpleAudioPlayer("intro.wav");
+        //music.play();
+        model.addAttribute("tomVisible", tomVisible);
+
+        Stream<String> stream = Files.lines(Paths.get("src/main/resources/templates/home/home.html"), StandardCharsets.ISO_8859_1);
+        StringBuilder x = new StringBuilder();
+        List<String> list = stream.collect(Collectors.toList());
+        for (String s : list) {
+            x.append(s);
+        }
+        String y = x.toString();;
+
+        return new ResponseEntity<>(y, HttpStatus.OK);
+
+
+
+
+    }
+
+     */
+
+    /*
+    @GetMapping("/user/{id}/{name}")
+    public String getUserDetails(
+            @PathVariable Integer id,
+            @PathVariable String name
+    )
+    {
+        return "Path variable data is: " + id + "-" + name;
+    }
+
+     */
     @GetMapping("/viewProductList") // edited to JPA
     public String viewProductList(Model model) {
         model.addAttribute("products", productService.fetchAllJpa());
         return "home/productList";
 
+    }
+
+    @GetMapping("/productListProducts")
+    public ResponseEntity<List<Product>> getAllProductsInList(){
+        List<Product> products = new ArrayList<>();
+        products = productService.fetchAllJpa();
+        return ResponseEntity.status(HttpStatus.OK).body(products);
     }
 
 

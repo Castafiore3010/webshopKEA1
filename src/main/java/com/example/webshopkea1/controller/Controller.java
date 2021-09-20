@@ -113,9 +113,43 @@ public class Controller {
             return ResponseEntity.status(HttpStatus.CREATED).header("Location", "products/" + product.getName() + "/" + product.getPrice()).body(newProduct.get());
         }
         else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(product);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(product);
         }
     }
+
+    @PutMapping("/updateProductREST/{id}")
+    public ResponseEntity<Product> update(@PathVariable ("id") int id, @RequestBody Product product) {
+
+
+
+
+        Optional<Product> oPproduct = productService.findProductByIdJpa(id);
+
+        if (oPproduct.isPresent()) {
+            if (product.getId() != id) {
+                return ResponseEntity.badRequest().build();
+            }
+            productService.updateProductJpa(product);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
+    @DeleteMapping("deleteProductREST/{id}")
+    public ResponseEntity<Product> delete(@PathVariable ("id") int id){
+        Optional<Product> oPproduct = productService.findProductByIdJpa(id);
+
+        if (oPproduct.isPresent()) {
+            productService.deleteProductJpa(id);
+            return ResponseEntity.ok().build();
+
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 
     @GetMapping("/addProduct")

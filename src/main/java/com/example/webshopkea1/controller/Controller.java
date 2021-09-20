@@ -2,6 +2,7 @@ package com.example.webshopkea1.controller;
 
 import com.example.webshopkea1.model.Product;
 import com.example.webshopkea1.model.SimpleAudioPlayer;
+import com.example.webshopkea1.repository.ProductRepositoryJpa;
 import com.example.webshopkea1.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,8 @@ public class Controller {
     @Autowired
     ProductService productService;
     static boolean tomVisible = false;
+    @Autowired
+    ProductRepositoryJpa repo;
 
 
 
@@ -95,6 +98,23 @@ public class Controller {
         List<Product> products = new ArrayList<>();
         products = productService.fetchAllJpa();
         return ResponseEntity.status(HttpStatus.OK).body(products);
+    }
+
+
+
+
+    @CrossOrigin(origins = "*", exposedHeaders = "Location")
+    @PostMapping(value ="/createProduct")
+    public ResponseEntity<Product> create(@RequestBody Product product) {
+        productService.insertProductJpa(product);
+        Optional<Product> newProduct = productService.findByName(product.getName());
+        // location header
+        if (newProduct.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CREATED).header("Location", "products/" + product.getName() + "/" + product.getPrice()).body(newProduct.get());
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(product);
+        }
     }
 
 

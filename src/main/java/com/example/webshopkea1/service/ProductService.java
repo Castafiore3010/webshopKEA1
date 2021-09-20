@@ -17,6 +17,8 @@ public class ProductService {
     @Autowired
     ProductRepositoryJpa productRepositoryJpa;
 
+    public Optional<Product> findByName(String name) {return productRepositoryJpa.findProductByName(name);}
+
 
     public List<Product> fetchAllProducts() { return productRepo.fetchAllProducts(); } // jdbc
 

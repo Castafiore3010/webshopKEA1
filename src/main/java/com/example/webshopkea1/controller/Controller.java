@@ -120,9 +120,6 @@ public class Controller {
     @PutMapping("/updateProductREST/{id}")
     public ResponseEntity<Product> update(@PathVariable ("id") int id, @RequestBody Product product) {
 
-
-
-
         Optional<Product> oPproduct = productService.findProductByIdJpa(id);
 
         if (oPproduct.isPresent()) {
